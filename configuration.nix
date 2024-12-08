@@ -110,8 +110,6 @@
     zsh
     wget
     curl
-    kitty
-    dolphin
     unzip
   ];
 

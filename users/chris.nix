@@ -25,7 +25,16 @@ in
     inputs.zen-browser.packages."${system}".specific
     tor-browser
     qbittorrent-enhanced
-    protonvpn-gui
     proton-pass
+    dolphin
   ];
+
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "jetbrains mono";
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      size = 12;
+    };
+  };
 }
