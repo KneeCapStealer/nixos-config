@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 let
   bindings = import ./hyprland-bindings.nix;
   opacity = 0.95;
@@ -12,6 +13,7 @@ in
       "XDG_SESSION_DESKTOP,Hyprland"
       "XDG_CURRENT_DESKTOP,Hyprland"
       "XDG_SESSION_TYPE,wayland"
+      "QT_QPA_PLATFORM,wayland"
     ];
 
     #####################
@@ -154,4 +156,6 @@ in
     # Example windowrule v2
     windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
   };
+
+  home.packages = [ pkgs.kdePackages.qtsvg ];
 }
