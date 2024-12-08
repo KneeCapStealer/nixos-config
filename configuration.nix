@@ -84,8 +84,8 @@
   programs.zsh.enable = true;
 
   fonts.packages = with pkgs; [
-    nerdfonts
     meslo-lgs-nf
+    nerd-fonts.jetbrains-mono
   ];
 
   fonts.fontconfig = {
