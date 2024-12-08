@@ -27,6 +27,5 @@ in
     qbittorrent-enhanced
     protonvpn-gui
     proton-pass
-    openvpn3
   ];
 }
