@@ -27,6 +27,7 @@ in
     qbittorrent-enhanced
     proton-pass
     dolphin
+    haruna
   ];
 
   programs.kitty = {
