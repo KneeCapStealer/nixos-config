@@ -14,6 +14,7 @@
       ./modules/danish.nix
       ./modules/dev/default.nix
       ./modules/looks/catppuccin.nix
+      ./modules/boot.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -40,21 +41,6 @@
     formatted = builtins.concatStringsSep "\n" sortedUnique;
   in
     formatted;
-
-  # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";
-    useOSProber = true;
-  };
-
-  boot.loader.efi = {
-    canTouchEfiVariables = true;
-    efiSysMountPoint = "/boot";
-  };
-
-  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   fileSystems = let
     compress   = "compress=zstd";
