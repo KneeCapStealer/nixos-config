@@ -5,8 +5,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [
       ./hardware-configuration.nix
       ./modules/hyprland.nix
       ./modules/sound.nix
@@ -15,7 +14,7 @@
       ./modules/dev/default.nix
       ./modules/looks/catppuccin.nix
       ./modules/boot.nix
-    ];
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -44,6 +43,19 @@
       ip = "185.111.109.1";
     };
   };
+
+  # steam
+  programs.steam = {
+    enable = true;
+
+    # Ports for online gaming
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+
+  # Nintendo pro controller
+  services.joycond.enable = true;
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
