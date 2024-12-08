@@ -17,19 +17,20 @@
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    erosanix = {
+      url = "github:emmanuelrosa/erosanix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin, ... } @ inputs:
+  outputs = { nixpkgs, home-manager, catppuccin, erosanix, ... } @ inputs:
   let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         overlays = [ inputs.hyprland.overlays.default ];
 
-        # _7zz can't build without this
-        config.packageOverrides = pkgs: {
-          _7zz = (pkgs._7zz.override { useUasm = true; });      
-        };
         config.allowUnfree = true;
       };
   in {
@@ -39,6 +40,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
+        erosanix.nixosModules.protonvpn
 
         home-manager.nixosModules.home-manager
         {
