@@ -31,6 +31,20 @@
     ];
   };
 
+  services.protonvpn = {
+    enable = true;
+
+    interface = {
+      name = "nixos-denmark";
+      privateKeyFile = "/root/secrets/nixos-denmark-privatekey";
+      dns.enable = true;
+    };
+    endpoint = {
+      publicKey = "+6VseaiwdWLFSlaTgwafQM9D9DsT1aanqywtgf7XdC8=";
+      ip = "185.111.109.1";
+    };
+  };
+
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
