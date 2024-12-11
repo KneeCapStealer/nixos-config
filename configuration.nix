@@ -95,10 +95,12 @@
 
   programs.zsh.enable = true;
 
-  fonts.packages = with pkgs; [
-    meslo-lgs-nf
-    nerd-fonts.jetbrains-mono
-  ];
+  fonts.packages =
+    let
+      # There is a function among us
+      pathsInSet = set: builtins.filter builtins.isPath (builtins.attrValues set);
+    in [ pkgs.noto-fonts-extra ]
+    ++ pathsInSet pkgs.nerd-fonts;
 
   fonts.fontconfig = {
     enable = true;
