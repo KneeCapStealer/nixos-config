@@ -14,7 +14,7 @@ in {
     (superExec "Q" "$term")
     (superExec "E" "$fileManager")
     (superExec "SPACE" "$menu")
-    (superExec "SPACE" "$browser")
+    (superExec "N" "$browser")
   ];
 
   windowManipulation = [

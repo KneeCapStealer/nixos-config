@@ -23,11 +23,14 @@
     dates = "daily";
 
     flake = inputs.self.outPath;
-    flags = [
-      "--update-input"
-      "nixpkgs"
+    flags = let
+      update = flake: ["--update-input" flake];
+    in [
       "-L"
-    ];
+    ] ++ update "nixpkgs" 
+      ++ update "hyprland"
+      ++ update "home-manager"
+      ++ update "zen-browser";
   };
 
   services.protonvpn = {
@@ -111,13 +114,6 @@
     cache32Bit = true;
     defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
     defaultFonts.sansSerif = [ "NotoSans Nerd Font" ];
-  };
-
-  environment.sessionVariables = {
-    XDG_CACHE_HOME  = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME   = "$HOME/.local/share";
-    XDG_STATE_HOME  = "$HOME/.local/state";
   };
 
   environment.systemPackages = with pkgs; [
