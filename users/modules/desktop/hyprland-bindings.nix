@@ -11,10 +11,10 @@ in {
   "$fileManager" = "dolphin";
 
   programShortcuts = [
-    superExec "Q" "$term"
-    superExec "E" "$fileManager"
-    superExec "SPACE" "$menu"
-    superExec "SPACE" "$browser"
+    (superExec "Q" "$term")
+    (superExec "E" "$fileManager")
+    (superExec "SPACE" "$menu")
+    (superExec "SPACE" "$browser")
   ];
 
   windowManipulation = [
@@ -78,20 +78,20 @@ in {
   screenshot = let
     execScreenShot = mods: mode: exec mods "PRINT" "hyprshot --freeze --clipboard-only -m ${mode}";
   in [
-    execScreenShot "" "active"
-    execScreenShot "SHIFT" "region"
-    execScreenShot "SUPER" "output"
+    (execScreenShot "" "active")
+    (execScreenShot "SHIFT" "region")
+    (execScreenShot "SUPER" "output")
   ];
 
   audioControls = [
-    exec "" "XF86AudioMute" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    (exec "" "XF86AudioMute" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
   ];
 
   audioControlsRepeat = let
-    max = 1.2;
+    max = "1.2";
     increment = "5%";
   in [
-    exec "" "XF86AudioRaiseVolume" "wpctl set-volume -l ${max} @DEFAULT_AUDIO_SINK@ ${increment}+"
-    exec "" "XF86AudioLowerVolume" "wpctl set-volume -l ${max} @DEFAULT_AUDIO_SINK@ ${increment}-"
+    (exec "" "XF86AudioRaiseVolume" "wpctl set-volume -l ${max} @DEFAULT_AUDIO_SINK@ ${increment}+")
+    (exec "" "XF86AudioLowerVolume" "wpctl set-volume -l ${max} @DEFAULT_AUDIO_SINK@ ${increment}-")
   ];
 }

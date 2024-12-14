@@ -10,7 +10,7 @@ in
     monitor = ",preferred,auto,auto";
 
     # XDG not needed as uwsm is used
-    env = env.QT ++ env.NVIDIA ++ env.OTHERS;
+    env = env.QT ++ env.NVIDIA ++ env.OTHER;
 
     #####################
     ### LOOK AND FEEL ###
