@@ -1,4 +1,7 @@
-{
+let
+  exec = mods: key: app: "${mods}, ${key}, exec, uwsm app -- ${app}";
+  superExec = exec "SUPER";
+in {
   # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 
   "$mod" = "SUPER";
@@ -8,10 +11,10 @@
   "$fileManager" = "dolphin";
 
   programShortcuts = [
-    "$mod, Q, exec, $term"
-    "$mod, E, exec, $fileManager"
-    "$mod, SPACE, exec, $menu"
-    "$mod, N, exec, $browser"
+    superExec "Q" "$term"
+    superExec "E" "$fileManager"
+    superExec "SPACE" "$menu"
+    superExec "SPACE" "$browser"
   ];
 
   windowManipulation = [
@@ -72,17 +75,23 @@
     "$mod, mouse:273, resizewindow"
   ];
 
-  screenshot = [
-    ",PRINT, exec, hyprshot --clipboard-only -m active"
-    "SHIFT, PRINT, exec, hyprshot --clipboard-only -m region"
+  screenshot = let
+    execScreenShot = mods: mode: exec mods "PRINT" "hyprshot --freeze --clipboard-only -m ${mode}";
+  in [
+    execScreenShot "" "active"
+    execScreenShot "SHIFT" "region"
+    execScreenShot "SUPER" "output"
   ];
 
   audioControls = [
-    ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    exec "" "XF86AudioMute" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ];
 
-  audioControlsRepeat = [
-    ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
-    ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+  audioControlsRepeat = let
+    max = 1.2;
+    increment = "5%";
+  in [
+    exec "" "XF86AudioRaiseVolume" "wpctl set-volume -l ${max} @DEFAULT_AUDIO_SINK@ ${increment}+"
+    exec "" "XF86AudioLowerVolume" "wpctl set-volume -l ${max} @DEFAULT_AUDIO_SINK@ ${increment}-"
   ];
 }

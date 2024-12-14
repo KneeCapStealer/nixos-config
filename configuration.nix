@@ -47,6 +47,7 @@
   # steam
   programs.steam = {
     enable = true;
+    extest.enable = true;
 
     # Ports for online gaming
     remotePlay.openFirewall = true;
@@ -95,18 +96,21 @@
 
   programs.zsh.enable = true;
 
-  fonts.packages =
-    let
-      # There is a function among us
-      pathsInSet = set: builtins.filter builtins.isPath (builtins.attrValues set);
-    in [ pkgs.noto-fonts-extra ]
-    ++ pathsInSet pkgs.nerd-fonts;
+  fonts.packages = with pkgs; [
+    noto-fonts
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.noto
+  ];
+
+  fonts.fontDir.enable = true;
 
   fonts.fontconfig = {
     enable = true;
     antialias = true;
     cache32Bit = true;
-    defaultFonts.monospace = [ "jetbrains mono" ];
+    defaultFonts.monospace = [ "JetBrainsMono Nerd Font" ];
+    defaultFonts.sansSerif = [ "NotoSans Nerd Font" ];
   };
 
   environment.sessionVariables = {
@@ -114,11 +118,8 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME   = "$HOME/.local/share";
     XDG_STATE_HOME  = "$HOME/.local/state";
-    ZDOTDIR         = "$HOME/.config/zsh";
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     zstd
     zsh

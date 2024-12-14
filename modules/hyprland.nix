@@ -11,6 +11,8 @@
 
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+
+    withUWSM = true;
   };
 
   programs.hyprlock.enable = true;
@@ -19,7 +21,7 @@
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.displayManager = {
-    defaultSession = "hyprland";
+    defaultSession = "hyprland-uwsm";
     sddm = {
       enable      = true;
       autoNumlock = true;

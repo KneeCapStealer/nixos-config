@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
   bindings = import ./hyprland-bindings.nix;
+  env = import ./hyprland-env.nix;
   opacity = 0.95;
 in
 {
@@ -8,13 +9,8 @@ in
   wayland.windowManager.hyprland.settings = {
     monitor = ",preferred,auto,auto";
 
-    # ENV
-    env = [
-      "XDG_SESSION_DESKTOP,Hyprland"
-      "XDG_CURRENT_DESKTOP,Hyprland"
-      "XDG_SESSION_TYPE,wayland"
-      "QT_QPA_PLATFORM,wayland"
-    ];
+    # XDG not needed as uwsm is used
+    env = env.QT ++ env.NVIDIA ++ env.OTHERS;
 
     #####################
     ### LOOK AND FEEL ###
