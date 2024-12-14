@@ -58,6 +58,8 @@
     localNetworkGameTransfers.openFirewall = true;
   };
 
+  hardware.steam-hardware.enable = true;
+
   # Nintendo pro controller
   services.joycond.enable = true;
 
